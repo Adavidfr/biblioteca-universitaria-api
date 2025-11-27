@@ -15,7 +15,7 @@ export class CreateLibroDto {
     editorial: string;
   
     @IsString()
-    anio_publicacion: number;
+    anio_publicacion: string;
   
     @IsString()
     categoria: string;

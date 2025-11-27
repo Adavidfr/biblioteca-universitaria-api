@@ -38,4 +38,23 @@ export class BibliotecaUniversitariaService {
     if (!libro) return null;
     return this.libroRepository.remove(libro);
   }
+
+  calcularEstadisticasPrestamos(prestamosPorDia: number[]): { totalPrestamos: number; promedio: number; mensaje: string } {
+    const totalPrestamos = prestamosPorDia.reduce((acc, prestamos) => acc + prestamos, 0);
+    const promedio = totalPrestamos / prestamosPorDia.length;
+
+    let mensaje: string;
+    if (totalPrestamos < 10) {
+      mensaje = 'Poca actividad de préstamo';
+    } else if (totalPrestamos <= 30) {
+      mensaje = 'Actividad normal';
+    } else {
+      mensaje = 'Alta demanda de libros';
+    }
+
+    return { totalPrestamos, promedio, mensaje };
+  }
+
+
+
 }

@@ -18,7 +18,7 @@ export class Libro {
   editorial: string;
 
   @Column()
-  anio_publicacion: number;
+  anio_publicacion: string;
 
   @Column()
   categoria: string;
@@ -34,5 +34,5 @@ export class Libro {
 
   @Column()
   copias_disponibles: number;
-  
+
 }

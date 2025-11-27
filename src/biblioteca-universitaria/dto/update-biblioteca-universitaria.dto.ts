@@ -20,7 +20,7 @@ export class UpdateLibroDto {
 
   @IsString()
   @IsOptional()
-  anio_publicacion?: number;
+  anio_publicacion?: string;
 
   @IsString()
   @IsOptional()

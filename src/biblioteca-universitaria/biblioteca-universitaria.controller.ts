@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, BadRequestException } from '@nestjs/common';
 import { BibliotecaUniversitariaService } from './biblioteca-universitaria.service';
 import { CreateLibroDto } from './dto/create-biblioteca-universitaria.dto';
 import { UpdateLibroDto } from './dto/update-biblioteca-universitaria.dto';
@@ -30,5 +30,14 @@ export class BibliotecaUniversitariaController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bibliotecaUniversitariaService.remove(id);
+  }
+
+  @Post('prestamos/semana')
+  calcularEstadisticas(@Body('prestamosPorDia') prestamosPorDia: number[]) {
+    if (!Array.isArray(prestamosPorDia) || prestamosPorDia.length !== 7) {
+      throw new BadRequestException('El cuerpo de la solicitud debe contener un arreglo de 7 números.');
+    }
+
+    return this.bibliotecaUniversitariaService.calcularEstadisticasPrestamos(prestamosPorDia);
   }
 }
